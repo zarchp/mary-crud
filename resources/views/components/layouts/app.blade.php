@@ -41,28 +41,19 @@
             <x-menu activate-by-route>
 
                 {{-- User --}}
-                @if ($user = auth()->user())
-                    <x-menu-separator />
-
-                    <x-list-item :item="$user" value="name" sub-value="email" no-separator no-hover
-                        class="-mx-2 !-my-2 rounded">
-                        <x-slot:actions>
-                            <x-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff"
-                                no-wire-navigate link="/logout" />
-                        </x-slot:actions>
-                    </x-list-item>
-
-                    <x-menu-separator />
-                @endif
+                <livewire:sidebar-profile />
 
                 <x-menu-item title="Home" icon="o-sparkles" link="/" />
-                <x-menu-item title="Users" icon="o-users" link="/users" />
-                <x-menu-item title="Spotlight" icon="o-light-bulb" link="#" no-wire-navigate
-                    @click.stop="$dispatch('mary-search-open')" />
-                <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub>
+
+                @if (auth()->check())
+                    <x-menu-item title="Users" icon="o-users" link="/users" />
+                    <x-menu-item title="Spotlight" icon="o-light-bulb" link="#" no-wire-navigate
+                        @click.stop="$dispatch('mary-search-open')" />
+                @endif
+
+                @if (auth()->guest())
+                    <x-menu-item title="Login" icon="o-arrow-right-end-on-rectangle" link="/auth/login" />
+                @endif
             </x-menu>
         </x-slot:sidebar>
 

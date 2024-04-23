@@ -20,7 +20,7 @@ class Spotlight
                     'avatar' => $user->avatar ?? '/empty-user.jpg',
                     'name' => $user->name,
                     'description' => $user->email,
-                    'link' => "/users/{$user->id}/edit"
+                    'link' => "/users/edit/{$user->id}"
                 ];
             });
     }
